@@ -1,0 +1,38 @@
+# Python temporary files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local Python environments
+.venv/
+venv/
+
+# Local/private data and generated output
+local_data/
+localdata/
+outputs/
+skills/geoskills/examples/generated/
+tmp/
+
+# Local environment secrets (keep documented placeholders shareable)
+.env
+.env.*
+!.env.example
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Desktop build output and packaged binaries
+apps/desktop/node_modules/
+apps/desktop/dist/
+apps/desktop/release/
+apps/desktop/src-tauri/target/
+apps/desktop/src-tauri/binaries/*.exe
+apps/desktop/backend/build/
+apps/desktop/backend/dist/
+build/
+dist/
+release/

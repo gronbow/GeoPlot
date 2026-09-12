@@ -1,0 +1,10 @@
+node_modules/
+dist/
+src-tauri/target/
+backend/build/
+backend/dist/
+backend/__pycache__/
+backend/tests/__pycache__/
+release/
+src-tauri/binaries/*.exe
+*.pyc

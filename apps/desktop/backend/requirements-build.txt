@@ -1,0 +1,2 @@
+-r ../../../skills/geoskills/scripts/requirements.txt
+PyInstaller==6.22.2

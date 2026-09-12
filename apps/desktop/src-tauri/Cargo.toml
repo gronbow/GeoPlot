@@ -1,0 +1,30 @@
+[package]
+name = "geoplot"
+version = "0.1.0"
+description = "Local-first geochemistry plotting desktop application"
+authors = ["GeoPlot contributors"]
+edition = "2024"
+rust-version = "1.85"
+
+[lib]
+name = "geoplot_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.5.6", features = [] }
+
+[dependencies]
+base64 = "0.22.1"
+chrono = { version = "0.4.42", default-features = false, features = ["clock", "serde"] }
+regex = "1.12.3"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.149"
+sha2 = "0.10.9"
+tauri = { version = "2.11.5", features = [] }
+tauri-plugin-dialog = "2.7.3"
+thiserror = "2.0.18"
+uuid = { version = "1.26.1", features = ["v4", "serde"] }
+wait-timeout = "0.2.1"
+
+[dev-dependencies]
+tempfile = "3.27.0"

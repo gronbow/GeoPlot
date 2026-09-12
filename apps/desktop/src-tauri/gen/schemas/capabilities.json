@@ -1,0 +1,1 @@
+{"main":{"identifier":"main","description":"Minimum permissions for the single local GeoPlot window.","local":true,"windows":["main"],"permissions":["core:event:allow-listen","core:event:allow-unlisten","dialog:allow-open"]}}
