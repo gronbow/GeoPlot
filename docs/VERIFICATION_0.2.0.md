@@ -56,7 +56,7 @@ The `v0.1.0` tag and release assets were not modified or overwritten.
 
 ## Gate 1 — CI before features
 
-Status: remote verification in progress.
+Status: complete.
 
 Added `.github/workflows/ci.yml` with five independent jobs on pull requests and
 pushes to `main`:
@@ -112,8 +112,13 @@ longer required it directly. The entry is now explicitly optional, matching
 its only remaining relationship under `@tauri-apps/cli`; this allows npm to
 skip the Windows binary on non-Windows runners while retaining it on Windows.
 
-Gate 1 cannot exit until the corrected pull-request revision runs all five
-required checks successfully. The pull request must not be merged as part of
+CI run `34740068769` on pull-request revision
+`c88a7a77638f0ec9cc578dace415f089aa8d57cd` completed successfully with all
+five required jobs passing. GitHub then reported pull request `#1` as clean
+and mergeable, demonstrating that the required checks both block an
+unsuccessful revision and accept a successful one.
+
+Gate 1 has exited. The pull request remains open and was not merged as part of
 this gate.
 
 ## Gate 2 — platform-neutral sidecar packaging
