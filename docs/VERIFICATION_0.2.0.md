@@ -106,6 +106,12 @@ selecting its optional platform package. After that minimal correction, a
 fresh local `npm ci`, all 22 frontend tests, the production build, and the npm
 production dependency audit passed.
 
+The second CI run showed that the lockfile entry retained from the former
+direct dependency was still marked as mandatory even though the manifest no
+longer required it directly. The entry is now explicitly optional, matching
+its only remaining relationship under `@tauri-apps/cli`; this allows npm to
+skip the Windows binary on non-Windows runners while retaining it on Windows.
+
 Gate 1 cannot exit until the corrected pull-request revision runs all five
 required checks successfully. The pull request must not be merged as part of
 this gate.
