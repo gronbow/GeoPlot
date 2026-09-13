@@ -56,7 +56,7 @@ The `v0.1.0` tag and release assets were not modified or overwritten.
 
 ## Gate 1 — CI before features
 
-Status: local implementation complete; remote exit evidence pending.
+Status: remote verification in progress.
 
 Added `.github/workflows/ci.yml` with five independent jobs on pull requests and
 pushes to `main`:
@@ -87,9 +87,28 @@ The local pip-audit run emitted a Windows cache rename warning after the audit
 tool attempted a cross-volume cache update. The audit itself completed
 successfully and reported no known vulnerabilities.
 
-Gate 1 cannot exit until the branch is pushed, a pull request runs all five
-checks successfully, and `main` requires those status checks. No remote branch,
-pull request, or protection setting has been changed yet.
+Remote protection and pull-request evidence:
+
+- branch: `codex/v0.2.0-engineering`;
+- pull request: `#1`;
+- `main` requires all five named jobs with strict up-to-date checks;
+- administrator enforcement and conversation resolution are enabled;
+- force pushes and branch deletion are disabled;
+- the pull request was reported as blocked while required checks were not
+  successful.
+
+The first CI run identified one platform-coupling defect before any feature
+work began: the frontend manifest directly required
+`@tauri-apps/cli-win32-x64-msvc`, so the Ubuntu frontend job failed at
+`npm ci` with `EBADPLATFORM`. The direct Windows-only dependency was removed;
+the platform-neutral `@tauri-apps/cli` dependency remains responsible for
+selecting its optional platform package. After that minimal correction, a
+fresh local `npm ci`, all 22 frontend tests, the production build, and the npm
+production dependency audit passed.
+
+Gate 1 cannot exit until the corrected pull-request revision runs all five
+required checks successfully. The pull request must not be merged as part of
+this gate.
 
 ## Gate 2 — platform-neutral sidecar packaging
 
