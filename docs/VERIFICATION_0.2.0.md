@@ -123,7 +123,42 @@ this gate.
 
 ## Gate 2 — platform-neutral sidecar packaging
 
-Status: not started.
+Status: complete for the native Windows path.
+
+The PyInstaller spec now emits a generic `geoskills-desktop-bridge` artifact.
+`scripts/build_sidecar.py` detects the running 64-bit Python platform, accepts
+only the three instructed target triples, rejects cross-compilation, runs the
+reviewed spec, and copies the result to Tauri's exact external-binary name.
+The ordinary Rust CI job uses this helper and runs the six source/frozen parity
+tests; it does not build an installer or publish an artifact.
+
+Native Windows verification:
+
+- helper allowlist, rejection, naming, invocation, and missing-output tests:
+  13 passed;
+- cross-compilation and an unknown Linux target were rejected before build with
+  exit code 2;
+- PyInstaller 6.22.2 under 64-bit Python 3.12.14 built the generic artifact;
+- copied Tauri sidecar size: 54,108,809 bytes;
+- copied Tauri sidecar SHA-256:
+  `3CD0FA2D89690F758A6EAC4AE735C72B5C56A6F10C851361436104C85171966A`;
+- source/frozen bridge parity: 6 passed, including version/capabilities,
+  CSV/XLSX inspection, the 47-analyte mixed-unit contract, plan/run reports,
+  scientific asset identities, and deterministic PNG hashes;
+- complete Python regression suite: 352 passed, 7 skipped;
+- frontend: 22 passed; production build passed; production audit found 0
+  vulnerabilities;
+- Rust/Tauri: 20 passed;
+- product version consistency: passed at `0.1.0`;
+- scientific asset diff from `v0.1.0`: none; all six recorded Gate 0 hashes are
+  unchanged.
+
+One initial local Rust invocation omitted the existing
+`GEOSKILLS_DESKTOP_SOURCE_PYTHON` compile-time setting and therefore reached
+the WindowsApps Python placeholder while creating a synthetic XLSX fixture.
+Repeating the unmodified test suite with the repository `.venv` path, matching
+the CI setup, passed all 20 tests. This was an invocation error rather than a
+source or scientific regression.
 
 ## Gate 3 — native macOS build
 

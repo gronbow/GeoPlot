@@ -52,7 +52,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="geoskills-desktop-bridge-x86_64-pc-windows-msvc",
+    name="geoskills-desktop-bridge",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

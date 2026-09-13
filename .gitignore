@@ -31,6 +31,7 @@ apps/desktop/dist/
 apps/desktop/release/
 apps/desktop/src-tauri/target/
 apps/desktop/src-tauri/binaries/*.exe
+apps/desktop/src-tauri/binaries/geoskills-desktop-bridge-*
 apps/desktop/backend/build/
 apps/desktop/backend/dist/
 build/

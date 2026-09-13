@@ -85,11 +85,17 @@ Package the bundled Python bridge before running the Tauri installer build:
 
 ```powershell
 .\.venv\Scripts\python -m pip install pyinstaller -r apps\desktop\backend\requirements-build.txt
-.\.venv\Scripts\python -m PyInstaller --clean --noconfirm apps\desktop\backend\pyinstaller\geoskills-desktop-bridge.spec
-Copy-Item .\dist\geoskills-desktop-bridge-x86_64-pc-windows-msvc.exe .\apps\desktop\src-tauri\binaries\
+.\.venv\Scripts\python scripts\build_sidecar.py --target x86_64-pc-windows-msvc
 Set-Location apps\desktop
 npm run tauri build
 ```
+
+The sidecar helper builds only for the running 64-bit Python interpreter. It
+allows Windows x86_64, macOS x86_64, and macOS Apple Silicon targets, rejects
+unknown triples, and refuses cross-compilation. On native macOS, invoke it with
+`.venv/bin/python scripts/build_sidecar.py --target <native-target>`; this
+documents the build path but does not claim macOS release support before native
+Gate 3 verification is complete.
 
 Build products, installers, sidecar executables, local data, and caches are
 excluded from source control.

@@ -87,10 +87,13 @@ jobs:
       - name: Build reviewed Windows sidecar
         shell: pwsh
         run: |
-          python -m PyInstaller --clean --noconfirm apps/desktop/backend/pyinstaller/geoskills-desktop-bridge.spec
-          New-Item -ItemType Directory -Force apps/desktop/src-tauri/binaries | Out-Null
-          Copy-Item dist/geoskills-desktop-bridge-x86_64-pc-windows-msvc.exe apps/desktop/src-tauri/binaries/
+          python scripts/build_sidecar.py --target x86_64-pc-windows-msvc
           "GEOSKILLS_DESKTOP_SOURCE_PYTHON=$((Get-Command python).Source)" >> $env:GITHUB_ENV
+
+      - name: Run source and frozen bridge parity
+        env:
+          GEOSKILLS_FROZEN_BRIDGE: apps/desktop/src-tauri/binaries/geoskills-desktop-bridge-x86_64-pc-windows-msvc.exe
+        run: python -m pytest apps/desktop/backend/tests/test_frozen_parity.py -q
 
       - name: Select minimum supported Rust toolchain
         run: |

@@ -44,4 +44,6 @@ cargo test --manifest-path src-tauri\Cargo.toml
 
 Use `npm run tauri dev` for source-mode development after installing the Python
 requirements from the repository root. A packaged build additionally requires
-the PyInstaller sidecar described in the root README.
+the PyInstaller sidecar described in the root README. Build it only through
+`scripts/build_sidecar.py`, which validates the native target and writes the
+exact external-binary filename expected by Tauri.
